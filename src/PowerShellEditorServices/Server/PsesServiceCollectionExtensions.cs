@@ -4,12 +4,11 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Management.Automation.Host;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.PowerShell.EditorServices.Hosting;
 using Microsoft.PowerShell.EditorServices.Services;
+using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace Microsoft.PowerShell.EditorServices.Server
 {
@@ -43,7 +42,23 @@ namespace Microsoft.PowerShell.EditorServices.Server
                             .Wait();
                         return extensionService;
                     })
-                .AddSingleton<AnalysisService>();
+                .AddSingleton<AnalysisService>()
+                // NOTE: See `LanguageServerSettingsWrapper`
+                .AddSingleton(
+                    new ConfigurationItem
+                    {
+                        Section = "powershell",
+                    })
+                .AddSingleton(
+                    new ConfigurationItem
+                    {
+                        Section = "files",
+                    })
+                .AddSingleton(
+                    new ConfigurationItem
+                    {
+                        Section = "search",
+                    });
         }
 
         public static IServiceCollection AddPsesDebugServices(
