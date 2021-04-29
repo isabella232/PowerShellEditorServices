@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Newtonsoft.Json
+    versions:
+    - 12.0.3
+  - dependency-name: OmniSharp.Extensions.LanguageClient
+    versions:
+    - 0.19.0
+  - dependency-name: OmniSharp.Extensions.LanguageServer
+    versions:
+    - 0.19.0
+  - dependency-name: OmniSharp.Extensions.DebugAdapter.Server
+    versions:
+    - 0.19.0
+  - dependency-name: OmniSharp.Extensions.DebugAdapter.Client
+    versions:
+    - 0.19.0
